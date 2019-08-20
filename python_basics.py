@@ -8,45 +8,35 @@ def hello(name):
     return "Hello " + name.strip() + "!"
 # Test wp1
 # name = input('what\'s your name? ')
-# print (hello(name))
+# print(hello(name))
 
 
 # Waypoin 2: Pythagorean Theorem
 def calculate_hypotenuse(a, b):
     return (a*a + b*b)**0.5
 # Test wp2
-# print (calculate_hypotenuse(1,1))
-# print (calculate_hypotenuse(3,4))
-# print (calculate_hypotenuse(8,10))
+# print(calculate_hypotenuse(1,1))
+# print(calculate_hypotenuse(3,4))
+# print(calculate_hypotenuse(8,10))
 
 
 # Waypoint 3: Test whether all Conditions are True
 def are_all_conditions_true(conditions):
-    if not conditions:
-        return None
-    elif False in conditions:
-        return False
-    else:
-        return True
+    return None if not conditions else not False in conditions
 # Test wp3
-# print (are_all_conditions_true([True, True, False, True, False, False, True]))
-# print (are_all_conditions_true([True, True, True]))
-# print (are_all_conditions_true([]))
+# print(are_all_conditions_true([True, True, False, True, False, False, True]))
+# print(are_all_conditions_true([True, True, True]))
+# print(are_all_conditions_true([]))
 
 
 # Waypoint 4: Test whether at least one Condition is True
 def is_a_condition_true(conditions):
-    if not conditions:
-        return None
-    elif True in conditions:
-        return True
-    else:
-        return False
+    return None if not conditions else True in conditions
 # Test wp4
-# print (is_a_condition_true([True, True, False, True, False, False, True]))
-# print (is_a_condition_true([True, True, True]))
-# print (is_a_condition_true([False, False]))
-# print (is_a_condition_true([]))
+# print(is_a_condition_true([True, True, False, True, False, False, True]))
+# print(is_a_condition_true([True, True, True]))
+# print(is_a_condition_true([False, False]))
+# print(is_a_condition_true([]))
 
 
 # Waypoint 5: Filter List of Integers
@@ -54,8 +44,8 @@ def filter_integers_greater_than(l, n):
     return [num for num in l if num > n]
 # Test wp5
 # l = [0, 3, 5, -2, 9, 8]
-# print (filter_integers_greater_than(l, 4))
-# print (filter_integers_greater_than(l, 6))
+# print(filter_integers_greater_than(l, 4))
+# print(filter_integers_greater_than(l, 6))
 
 
 # Waypoint 6: Find Cheapest Hotels
@@ -73,19 +63,38 @@ def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
 #         ('Sheraton Saigon Hotel', 216),
 #         ('Park Hyatt Saigon', 209)
 #     ]
-# print (find_cheapest_hotels(hotel_daily_rates, 50))
-# print (find_cheapest_hotels(hotel_daily_rates, 85))
-# print (find_cheapest_hotels(hotel_daily_rates, 150))
+# print(find_cheapest_hotels(hotel_daily_rates, 50))
+# print(find_cheapest_hotels(hotel_daily_rates, 85))
+# print(find_cheapest_hotels(hotel_daily_rates, 150))
 
 
 # Waypoint 7: Calculate Distance between two 2D Points
 def calculate_euclidean_distance_between_2_points(p1, p2):
-    pass
+    return calculate_hypotenuse(p2[0] - p1[0], p2[1] - p1[1])
+# Test wp7
+# print(calculate_euclidean_distance_between_2_points((1, 2), (1, 2)))
+# print(calculate_euclidean_distance_between_2_points((0, 0), (3, 4)))
+# print(calculate_euclidean_distance_between_2_points((1, 1), (2, 2)))
 
 
 # Waypoint 8: Calculate Distance between several 2D Points
 def calculate_euclidean_distance_between_points(points):
-    pass
+    if len(points) >= 2:
+        sum = 0
+        for i in range(len(points) - 1):
+            for j in range(i+1, len(points), 1):
+                dis = calculate_euclidean_distance_between_2_points(points[i] \
+                ,points[j])
+                sum += dis
+        return sum
+    else:
+        raise ValueError('The list MUST contain at least 2 points')
+# Test wp8
+# print(calculate_euclidean_distance_between_points([(0, 0), (3, 4)]))
+# print(calculate_euclidean_distance_between_points([(0, 0), (3, 4), (0, 0)]))
+# print(calculate_euclidean_distance_between_points([(0, 0), (3, 4), (-1, -1)]))
+# print(calculate_euclidean_distance_between_points([]))
+# print(calculate_euclidean_distance_between_points([(1, 1)]))
 
 
 # Waypoint 9: Capitalize the Words of a String
