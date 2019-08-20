@@ -1,33 +1,81 @@
-import pygame
+# import pygame
+from math import sqrt
 from os import path
+import operator
+
 # Waypoin 1: Say Greeting
 def hello(name):
-    print("Hello" + name + "!")
+    return "Hello " + name.strip() + "!"
+# Test wp1
+# name = input('what\'s your name? ')
+# print (hello(name))
 
 
 # Waypoin 2: Pythagorean Theorem
 def calculate_hypotenuse(a, b):
-    return a**b*0.5
+    return (a*a + b*b)**0.5
+# Test wp2
+# print (calculate_hypotenuse(1,1))
+# print (calculate_hypotenuse(3,4))
+# print (calculate_hypotenuse(8,10))
 
 
 # Waypoint 3: Test whether all Conditions are True
 def are_all_conditions_true(conditions):
-    pass
+    if not conditions:
+        return None
+    elif False in conditions:
+        return False
+    else:
+        return True
+# Test wp3
+# print (are_all_conditions_true([True, True, False, True, False, False, True]))
+# print (are_all_conditions_true([True, True, True]))
+# print (are_all_conditions_true([]))
 
 
 # Waypoint 4: Test whether at least one Condition is True
 def is_a_condition_true(conditions):
-    pass
+    if not conditions:
+        return None
+    elif True in conditions:
+        return True
+    else:
+        return False
+# Test wp4
+# print (is_a_condition_true([True, True, False, True, False, False, True]))
+# print (is_a_condition_true([True, True, True]))
+# print (is_a_condition_true([False, False]))
+# print (is_a_condition_true([]))
 
 
 # Waypoint 5: Filter List of Integers
 def filter_integers_greater_than(l, n):
-    pass
+    return [num for num in l if num > n]
+# Test wp5
+# l = [0, 3, 5, -2, 9, 8]
+# print (filter_integers_greater_than(l, 4))
+# print (filter_integers_greater_than(l, 6))
 
 
 # Waypoint 6: Find Cheapest Hotels
 def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
-    pass
+    hotel_daily_rates = sorted(hotel_daily_rates, key = lambda tup: tup[1])
+    return [hotel_daily_rates[i][0] for i in range(len(hotel_daily_rates)) \
+    if hotel_daily_rates[i][1] <= maximum_daily_rate]
+# Test wp6
+# hotel_daily_rates = [
+#         ('Majestic Saigon Hotel', 93),
+#         ('Hotel Grand Saigon', 120),
+#         ('Sofitel Saigon Plaza', 123),
+#         ('Hotel Continental', 62),
+#         ('Caravelle Hotel', 180),
+#         ('Sheraton Saigon Hotel', 216),
+#         ('Park Hyatt Saigon', 209)
+#     ]
+# print (find_cheapest_hotels(hotel_daily_rates, 50))
+# print (find_cheapest_hotels(hotel_daily_rates, 85))
+# print (find_cheapest_hotels(hotel_daily_rates, 150))
 
 
 # Waypoint 7: Calculate Distance between two 2D Points
