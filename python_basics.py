@@ -1,7 +1,6 @@
 # import pygame
 from math import sqrt
 from os import path
-import operator
 
 # Waypoin 1: Say Greeting
 def hello(name):
@@ -99,6 +98,7 @@ def calculate_euclidean_distance_between_points(points):
 
 # Waypoint 9: Capitalize the Words of a String
 def capitalize_words(s):
+import operator
     pass
 
 
