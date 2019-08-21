@@ -1,10 +1,10 @@
+# from string import capwords
 # import pygame
-from math import sqrt
-from os import path
+# from math import sqrt
 
 # Waypoin 1: Say Greeting
 def hello(name):
-    return "Hello " + name.strip() + "!"
+    return "Hello " + ' '.join(name.strip().split()) + "!"
 # Test wp1
 # name = input('what\'s your name? ')
 # print(hello(name))
@@ -79,13 +79,8 @@ def calculate_euclidean_distance_between_2_points(p1, p2):
 # Waypoint 8: Calculate Distance between several 2D Points
 def calculate_euclidean_distance_between_points(points):
     if len(points) >= 2:
-        sum = 0
-        for i in range(len(points) - 1):
-            for j in range(i+1, len(points), 1):
-                dis = calculate_euclidean_distance_between_2_points(points[i] \
-                ,points[j])
-                sum += dis
-        return sum
+        return sum(calculate_euclidean_distance_between_2_points(points[i],\
+        points[i+1]) for i in range(len(points)-1))
     else:
         raise ValueError('The list MUST contain at least 2 points')
 # Test wp8
@@ -98,13 +93,42 @@ def calculate_euclidean_distance_between_points(points):
 
 # Waypoint 9: Capitalize the Words of a String
 def capitalize_words(s):
-import operator
-    pass
+    if type(s) is str:
+        return ' '.join(word.capitalize() for word in s.strip().split())
+    elif s is None:
+        return None
+    else:
+        raise TypeError('Not a string')
+# Test wp9
+# print(capitalize_words('hello, word!'))
+# print(capitalize_words('JACK CARVER'))
+# print('   ')
+# print(capitalize_words('Không  có gì    quý hơn  độc lập      tự do'))
+# print(capitalize_words(None))
+# print(capitalize_words(69))
 
 
 # Waypoint 10: Uppercase and Lowercase Words
 def uppercase_lowercase_words(s):
-    pass
+    if type(s) is str:
+        s = s.split()
+        for i in range(len(s)):
+            if i%2:
+                s[i] = s[i].lower()
+            else:
+                s[i] = s[i].upper()
+        return ' '.join(s)
+    elif s is None:
+        return None
+    else:
+        raise TypeError('Not a string')
+# Test wp10
+# print(uppercase_lowercase_words('one two three four five'))
+# print(uppercase_lowercase_words('SIX SEVEN EIGHT NINE TEN'))
+# print(uppercase_lowercase_words('1 one two 2 3 three four 4 five six'))
+# print(uppercase_lowercase_words('   '))
+# print(uppercase_lowercase_words(None))
+# print(uppercase_lowercase_words(69))
 
 
 # Waypoint 11: Factorial
@@ -134,24 +158,24 @@ def roman_numeral_to_int(roman_numeral):
 
 
 # Waypoint 16: Play a Melody
-def play_melody(melody, sound_basedir):
-    melody_no_sharp = []
-    flat = {'c': 'db', 'd': 'eb', 'f': 'gb', 'g': 'ab', 'a': 'bb'}
-    for i in melody:
-        if '#' in i:
-            note = path.join(sound_basedir,
-                             flat[i.lower()[0]]+i[-1]+'.ogg')
-            melody_no_sharp.append(note)
-        else:
-            note = path.join(sound_basedir, i.lower() + '.ogg')
-            melody_no_sharp.append(note)
-    pygame.init()
-    for i in melody_no_sharp:
-        sound = pygame.mixer.Sound(i)
-        channel = sound.play()
-        clock = pygame.time.Clock().tick(1.234567890)
-        channel = sound.stop()
-    pygame.quit()
+# def play_melody(melody, sound_basedir):
+#     melody_no_sharp = []
+#     flat = {'c': 'db', 'd': 'eb', 'f': 'gb', 'g': 'ab', 'a': 'bb'}
+#     for i in melody:
+#         if '#' in i:
+#             note = path.join(sound_basedir,
+#                              flat[i.lower()[0]]+i[-1]+'.ogg')
+#             melody_no_sharp.append(note)
+#         else:
+#             note = path.join(sound_basedir, i.lower() + '.ogg')
+#             melody_no_sharp.append(note)
+#     pygame.init()
+#     for i in melody_no_sharp:
+#         sound = pygame.mixer.Sound(i)
+#         channel = sound.play()
+#         clock = pygame.time.Clock().tick(1.234567890)
+#         channel = sound.stop()
+#     pygame.quit()
 
 
 # MELODY_HAPPY_BIRTHDAY_TO_YOU = (
