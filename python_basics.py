@@ -1,6 +1,7 @@
 # from string import capwords
 # import pygame
 # from math import sqrt
+import string
 
 # Waypoin 1: Say Greeting
 def hello(name):
@@ -151,8 +152,8 @@ def factorial(n):
 # Waypoint 12: Convert a Digit Character to an Integer
 def char_to_int(c):
     try:
-        if len(c) != 1 or ord(c) < 48 or ord(c) > 57:
-            raise ValueError(' Not a single digit')
+        if len(c) != 1 or c not in string.digits:
+            raise ValueError('Not a single digit')
         return ord(c) - 48
     except TypeError:
         raise TypeError('Not a string')
