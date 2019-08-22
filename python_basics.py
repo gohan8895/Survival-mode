@@ -133,12 +133,34 @@ def uppercase_lowercase_words(s):
 
 # Waypoint 11: Factorial
 def factorial(n):
-    pass
+    try:
+        if n < 0:
+            raise ValueError('Not a positive integer')
+        res = 1
+        for i in range(1,n+1,1):
+            res *= i
+        return res
+    except TypeError:
+        raise TypeError('Not an integer')
+# Test wp11
+# print([(n, factorial(n)) for n in range(6)])
+# print(factorial('3'))
+# print(factorial(-2))
 
 
 # Waypoint 12: Convert a Digit Character to an Integer
 def char_to_int(c):
-    pass
+    try:
+        if len(c) != 1 or ord(c) < 48 or ord(c) > 57:
+            raise ValueError(' Not a single digit')
+        return ord(c) - 48
+    except TypeError:
+        raise TypeError('Not a string')
+# Test wp12
+# print(char_to_int('4'))
+# print(char_to_int(None))
+# print(char_to_int(13.4))
+# print(char_to_int('12'))
 
 
 # Waypoint 13: Convert a String of Digit Characters to an Integer
