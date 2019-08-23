@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # from string import capwords
 # import pygame
 # from math import sqrt
@@ -56,7 +57,7 @@ def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
 # Test wp6
 # hotel_daily_rates = [
 #         ('Majestic Saigon Hotel', 93),
-#         ('Hotel Grand Saigon', 120),
+#         ('Hotel Grand Saigon', 1translate(None, "!?.,' '")20),
 #         ('Sofitel Saigon Plaza', 123),
 #         ('Hotel Continental', 62),
 #         ('Caravelle Hotel', 180),
@@ -166,12 +167,34 @@ def char_to_int(c):
 
 # Waypoint 13: Convert a String of Digit Characters to an Integer
 def string_to_int(s):
-    pass
+    try:
+        return int(''.join(str(num) for num in [char_to_int(c) for c in s]))
+    except ValueError:
+        raise ValueError('Not a positive integer string expression')
+    except TypeError:
+        raise TypeError('Not a string')
+# Test wp13
+# print(string_to_int('17049171'))
+# print(string_to_int(None))
+# print(string_to_int(1984))
+# print(string_to_int('123abcd'))
+# print(string_to_int('-1234'))
 
 
 # Waypoint 14: Test Palindrome String
 def is_palindrome(value):
-    pass
+    value = ''.join(char.lower() for char in str(value) if char.isalnum())
+    return value[::-1] == value
+# Test wp14
+# print(is_palindrome('madam'))
+# print(is_palindrome('racecar'))
+# print(is_palindrome(10801))
+# print(is_palindrome(1.947491))
+# print(is_palindrome(1984))
+# print(is_palindrome('Hello, word!'))
+# print(is_palindrome('A man, a plan, a canal, Panama!'))
+# print(is_palindrome('Was it a car or a cat I saw?'))
+# print(is_palindrome("No 'x' in Nixon"))
 
 
 # Waypoint 15: Convert Roman Numerals to Integer
