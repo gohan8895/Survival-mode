@@ -6,7 +6,7 @@ import string
 
 # Waypoin 1: Say Greeting
 def hello(name):
-    return "Hello " + ' '.join(name.strip().split()) + "!"
+    return "Hello " + ' '.join(name.split()) + "!"
 # Test wp1
 # name = input('what\'s your name? ')
 # print(hello(name))
@@ -96,7 +96,7 @@ def calculate_euclidean_distance_between_points(points):
 # Waypoint 9: Capitalize the Words of a String
 def capitalize_words(s):
     if type(s) is str:
-        return ' '.join(word.capitalize() for word in s.strip().split())
+        return ' '.join(word.capitalize() for word in s.split())
     elif s is None:
         return None
     else:
