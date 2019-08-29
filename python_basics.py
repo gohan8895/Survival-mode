@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-# from string import capwords
-# import pygame
+import pygame
 # from math import sqrt
 import string
+import time
 
 # Waypoin 1: Say Greeting
 def hello(name):
-    return "Hello " + ' '.join(name.split()) + "!"
+    return "Hello " + ' '.join(name.strip().split()) + "!"
 # Test wp1
 # name = input('what\'s your name? ')
 # print(hello(name))
@@ -87,7 +87,7 @@ def calculate_euclidean_distance_between_points(points):
         raise ValueError('The list MUST contain at least 2 points')
 # Test wp8
 # print(calculate_euclidean_distance_between_points([(0, 0), (3, 4)]))
-# print(calculate_euclidean_distance_between_points([(0, 0), (3, 4), (0, 0)]))
+# print(calculate_euclidean_dipygamestance_between_points([(0, 0), (3, 4), (0, 0)]))
 # print(calculate_euclidean_distance_between_points([(0, 0), (3, 4), (-1, -1)]))
 # print(calculate_euclidean_distance_between_points([]))
 # print(calculate_euclidean_distance_between_points([(1, 1)]))
@@ -96,7 +96,7 @@ def calculate_euclidean_distance_between_points(points):
 # Waypoint 9: Capitalize the Words of a String
 def capitalize_words(s):
     if type(s) is str:
-        return ' '.join(word.capitalize() for word in s.split())
+        return ' '.join(word.capitalize() for word in s.strip().split())
     elif s is None:
         return None
     else:
@@ -159,7 +159,7 @@ def char_to_int(c):
     except TypeError:
         raise TypeError('Not a string')
 # Test wp12
-# print(char_to_int('4'))
+# print(char_to_int('9'))
 # print(char_to_int(None))
 # print(char_to_int(13.4))
 # print(char_to_int('12'))
@@ -186,7 +186,7 @@ def is_palindrome(value):
     value = ''.join(char.lower() for char in str(value) if char.isalnum())
     return value[::-1] == value
 # Test wp14
-# print(is_palindrome('madam'))
+# print(is_palindrome('ma d am'))
 # print(is_palindrome('racecar'))
 # print(is_palindrome(10801))
 # print(is_palindrome(1.947491))
@@ -198,48 +198,86 @@ def is_palindrome(value):
 
 
 # Waypoint 15: Convert Roman Numerals to Integer
-# Python Function to Return the Numerical Value of a Roman Numeral
 def roman_numeral_to_int(roman_numeral):
-    pass
+    try:
+        roman_symbol_value = {"N": 0,
+                              "I": 1,
+                              "V": 5,
+                              "X": 10,
+                              "L": 50,
+                              "C": 100,
+                              "D": 500,
+                              "M": 1000
+                              }
+        result = 0
+        for i in range(len(roman_numeral) - 1):
+            if roman_symbol_value[roman_numeral[i]] <\
+               roman_symbol_value[roman_numeral[i+1]]:
+                result -= roman_symbol_value[roman_numeral[i]]
+            else:
+                result += roman_symbol_value[roman_numeral[i]]
+        result += roman_symbol_value[roman_numeral[-1]]
+        return result
+    except (ValueError, KeyError):
+        raise ValueError("Not a Roman numeral")
+    except TypeError:
+        raise TypeError("Not a string")
+# Test wp15
+# print(roman_numeral_to_int('XXXIX'))
+# print(roman_numeral_to_int('CCXLVI'))
+# print(roman_numeral_to_int('DCCLXXXIX'))
+# print(roman_numeral_to_int('MMCDXXI'))
+# print(roman_numeral_to_int('CLX'))
+# print(roman_numeral_to_int('CCVII'))
+# print(roman_numeral_to_int('MIX'))
+# print(roman_numeral_to_int('MLXVI'))
+# print(roman_numeral_to_int('MDCCLXXVI'))
+# print(roman_numeral_to_int('MCMLIV'))
+# print(roman_numeral_to_int('MMXIV'))
+# print(roman_numeral_to_int('MMMCMXCIX'))
+# print(roman_numeral_to_int(1234))
+# print(roman_numeral_to_int('XYZ'))
 
 
 # Waypoint 16: Play a Melody
-# def play_melody(melody, sound_basedir):
-#     melody_no_sharp = []
-#     flat = {'c': 'db', 'd': 'eb', 'f': 'gb', 'g': 'ab', 'a': 'bb'}
-#     for i in melody:
-#         if '#' in i:
-#             note = path.join(sound_basedir,
-#                              flat[i.lower()[0]]+i[-1]+'.ogg')
-#             melody_no_sharp.append(note)
-#         else:
-#             note = path.join(sound_basedir, i.lower() + '.ogg')
-#             melody_no_sharp.append(note)
-#     pygame.init()
-#     for i in melody_no_sharp:
-#         sound = pygame.mixer.Sound(i)
-#         channel = sound.play()
-#         clock = pygame.time.Clock().tick(1.234567890)
-#         channel = sound.stop()
-#     pygame.quit()
-
+def play_melody(melody, sound_basedir):
+    sharp_to_flat = {'c#': 'db',
+                     'd#': 'eb',
+                     'f#': 'gb',
+                     'g#': 'ab',
+                     'a#': 'bb'
+                     }
+    melody_path_name = []
+    for note in melody:
+        if "#" in note:
+            note = sound_basedir + '/' + sharp_to_flat[note[:2].lower()] + \
+            note[-1] + ".ogg"
+            melody_path_name.append(note)
+        else:
+            note = sound_basedir + '/' + note.lower() + ".ogg"
+            melody_path_name.append(note)
+    for note in melody_path_name:
+        pygame.init()
+        sound = pygame.mixer.Sound(note)
+        channel = sound.play()
+        pygame.time.delay(400)
+        channel = sound.stop()
+    return melody_path_name
+MELODY_I_LOVE_YOU = [
+        'G3', 'E3', 'G3', 'G3', 'E3', 'G3',
+        'A3', 'G3', 'F3', 'E3', 'D3', 'E3', 'F3',
+        'E3', 'F3', 'G3', 'C3', 'C3', 'C3', 'C3', 'C3', 'D3', 'E3', 'F3', 'G3',
+        'G3', 'D3', 'D3', 'F3', 'E3', 'D3', 'C3',
+        'G3', 'E3', 'G3', 'G3', 'E3', 'G3',
+        'A3', 'G3', 'F3', 'E3', 'D3', 'E3', 'F3',
+        'E3', 'F3', 'G3', 'C3', 'C3', 'C3', 'C3', 'C3', 'D3', 'E3', 'F3', 'G3',
+        'G3', 'D3', 'D3', 'F3', 'E3', 'D3', 'C3'
+        ]
+print(play_melody(MELODY_I_LOVE_YOU, './sounds/piano'))
 
 # MELODY_HAPPY_BIRTHDAY_TO_YOU = (
 #     'C4', 'C4', 'D4', 'C4', 'F4', 'E4',
 #     'C4', 'C4', 'D4', 'C4', 'G4', 'F4',
 #     'C4', 'C4', 'C5', 'A4', 'F4', 'E4', 'D4',
-#     'A#4', 'A#4', 'A4', 'F4', 'G4', 'F4',
-# )
-# MELODY_FUR_ELISE = (
-#     'E5', 'Eb5', 'E5', 'Eb5', 'E5', 'B4', 'D5', 'C5', 'A4',
-#     'C4', 'E4', 'A4', 'B4',
-#     'E4', 'Ab4', 'B4', 'C5',
-#     'E4', 'E5', 'Eb5', 'E5', 'Eb5', 'E5', 'B4', 'D5', 'C5', 'A4',
-#     'C4', 'E4', 'A4', 'B4',
-#     'E4', 'C5', 'B4', 'A4',
-#     'E5', 'Eb5', 'E5', 'Eb5', 'E5', 'B4', 'D5', 'C5', 'A4',
-#     'C4', 'E4', 'A4', 'B4',
-#     'E4', 'Ab4', 'B4', 'C5',
-#     'E4', 'E5', 'Eb5', 'E5', 'Eb5', 'E5', 'B4', 'D5', 'C5', 'A4',
-#     'C4', 'E4', 'A4', 'B4',
-#     'E4', 'C5', 'B4', 'A4',
+#     'A#4', 'A#4', 'A4', 'F4', 'G4', 'F4')
+# print(play_melody(MELODY_HAPPY_BIRTHDAY_TO_YOU, './sounds/piano'))
